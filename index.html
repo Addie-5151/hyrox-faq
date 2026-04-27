@@ -198,21 +198,21 @@ function render() {
 
     box.innerHTML = filtered.map(c => `
         <div class="mb-6">
-            <h2 class="text-xl font-bold mb-3">${c.name}</h2>
+            <h2 class="text-xl font-bold mb-4 mt-6 text-gray-900">${c.name}</h2>
 
             ${c.items.map((i, idx) => {
                 const id = c.id + "-" + idx;
                 const open = state.expanded.has(id);
 
                 return `
-                    <div class="border rounded mb-2 bg-white">
-                        <button class="w-full text-left p-3 flex justify-between" data-id="${id}">
+                    <div class="border rounded mb-4 bg-white shadow-sm">
+                        <button class="w-full text-left p-4 flex justify-between items-center font-semibold text-gray-800 hover:bg-gray-50" data-id="${id}">
                             <span>${i.question}</span>
-                            <span>${open ? "▲" : "▼"}</span>
+                            <span class="text-gray-400 text-sm">${open ? "▲" : "▼"}</span>
                         </button>
 
                         ${open ? `
-                            <div class="p-3 border-t text-gray-600">
+                            <div class="p-4 border-t text-gray-500 leading-relaxed bg-gray-50">
                                 ${i.answer}
                             </div>
                         ` : ""}
