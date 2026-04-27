@@ -6,268 +6,216 @@
     <title>HYROX 常见问题</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
     </style>
 </head>
-<body>
-    <div id="root"></div>
-    <script>
-        const faqData = {
-            categories: [
-                {
-                    id: "registration",
-                    name: "报名相关",
-                    color: "blue",
-                    items: [
-                        { question: "比赛怎么报名", answer: "您可以查询HYROX健身跑小程序报名。也可以关注公众号、小红书《HYROX健身跑》了解更多赛事信息。" },
-                        { question: "杭州/深圳/上海/其他城市站什么时候开始报名", answer: "请您关注公众号、小红书等社交平台的\"HYROX健身跑\"账号官宣。" },
-                        { question: "为什么显示一个金额，到了付款时候金额变了", answer: "您好，报名人数太多，早鸟价和优惠价名额被抢完，就自动恢复原价了。" },
-                        { question: "提前多久到场", answer: "建议提前60-90分钟到场。" },
-                        { question: "报名后可以改名字吗", answer: "报名后不可以改名字。请确保报名时填写的信息准确无误。" },
-                        { question: "可以代报名吗", answer: "不可以。参赛者需要自行报名，并提供真实信息。" },
-                        { question: "报名费包括什么", answer: "报名费包括参赛权利、完赛证书、完赛物资等。具体包含内容请查看赛事详情页面。" },
-                        { question: "有学生优惠吗", answer: "请关注官方公众号了解最新的优惠政策。" }
-                    ]
-                },
-                {
-                    id: "modification",
-                    name: "变更/退款/延期",
-                    color: "green",
-                    items: [
-                        { question: "我可以延期吗？", answer: "您好，延期只允许延期到您订单城市的接下来两站之一。任何订单的变更操作都只有一次（需支付差价以及50元变更手续费），原队员和组别需要保持一致。" },
-                        { question: "我生病了，需要退票", answer: "请提供诊断证明（有医生的\"建议休息xx天\"字样）、订单截图等信息，我们帮您登记后审核处理（医疗退费为退款50%）。" },
-                        { question: "可以换组别吗？", answer: "为保障赛事公平性，HYROX对参赛组别实行严格管理。一旦报名确认，组别将不予调整。" },
-                        { question: "可以改队友吗", answer: "接力队伍中的队友可以更换，但需要满足组别要求（如混合接力需2男2女）。更换队友需要支付手续费。" },
-                        { question: "退款需要多久到账", answer: "审核通过后，退款通常在7-15个工作日内到账。" },
-                        { question: "可以转让报名资格吗", answer: "报名资格不可转让。如需变更，请按照延期或退款流程处理。" },
-                        { question: "变更手续费是多少", answer: "变更手续费为50元。如有差价，需另外支付。" },
-                        { question: "超过变更截止日期还能改吗", answer: "超过截止日期后，只有医疗异常可以申请变更。需要提供医疗证明。" }
-                    ]
-                },
-                {
-                    id: "awards",
-                    name: "奖励/物资领取",
-                    color: "purple",
-                    items: [
-                        { question: "我错过了颁奖，怎么补领旗子？", answer: "您可以到咨询台咨询。如果已经离开，请提供身份证明、成绩证明截图，留下收件人信息，我们会安排到付寄出快递。" },
-                        { question: "我忘了拿完赛patch，怎么补领？", answer: "请出示成绩证明截图，扫描收款码支付（一个魔术贴20元），留下收件人信息，我们会到付寄出快递。" },
-                        { question: "奖牌什么时候发", answer: "完赛选手在赛后会立即获得完赛证书和物资。奖牌通常在赛后一周内寄出。" },
-                        { question: "可以邮寄物资吗", answer: "是的，如果您无法现场领取，可以提供邮寄地址，我们会安排到付快递。" },
-                        { question: "物资可以自己选择吗", answer: "完赛物资是固定的，无法选择。具体物资内容请查看赛事详情。" },
-                        { question: "没有完赛有物资吗", answer: "没有完赛的选手无法获得完赛物资。可以购买纪念物品。" }
-                    ]
-                },
-                {
-                    id: "health-safety",
-                    name: "健康与安全",
-                    color: "amber",
-                    items: [
-                        { question: "赛道和器械是否安全？", answer: "HYROX是室内竞赛，全程场地和赛道均按照国际赛事标准布置，并由专业安保、现场裁判及医疗团队逐一检查。" },
-                        { question: "我有高血压/哮喘，可以参加吗？", answer: "请自行评估身体状况是否适合高强度竞赛。根据HYROX官方规则，针对哮喘等治疗性药物通常允许携带与使用。" },
-                        { question: "如果比赛中身体不适怎么办？", answer: "请向最近的工作人员或医护人员报告具体症状，现场医疗团队会对您进行评估与急救措施。" },
-                        { question: "赛前需要做什么准备", answer: "建议进行充分的体能训练和适应性练习。赛前一周避免过度训练，保证充足睡眠。" },
-                        { question: "可以带医疗器械吗", answer: "可以。如需携带医疗器械（如心脏起搏器、胰岛素注射器等），请提前告知组委会。" },
-                        { question: "有医疗保险吗", answer: "HYROX会为所有参赛者购买基础保险。建议自行购买额外的运动保险。" },
-                        { question: "比赛中可以停下来休息吗", answer: "可以。您可以在任何时间停下来休息，但计时不会停止。" },
-                        { question: "如果中途放弃怎么办", answer: "如果您无法继续，请告知最近的工作人员。您将被记录为未完赛。" }
-                    ]
-                },
-                {
-                    id: "supplies",
-                    name: "补给与物资",
-                    color: "red",
-                    items: [
-                        { question: "现场有哪些补给", answer: "有水，电解质，功能性饮料。赛后会有香蕉。其他的建议您自备。自带营养补充的选手必须从比赛开始时就自行携带。" },
-                        { question: "可以自带饮料吗", answer: "可以。您可以自带饮料，但不能在比赛中接受他人提供的饮料（补给站除外），否则会被罚时。" },
-                        { question: "补给站在哪里", answer: "补给站位置会在赛前说明会中详细介绍。通常在比赛的关键位置设置。" },
-                        { question: "可以自带能量棒吗", answer: "可以。能量棒、能量胶等补充品可以自行携带。" },
-                        { question: "补给站的饮料免费吗", answer: "是的，补给站的所有饮料和补给都是免费的。" },
-                        { question: "赛后有什么补给", answer: "赛后会提供香蕉、饼干、水和电解质饮料等补给。" }
-                    ]
-                },
-                {
-                    id: "relay",
-                    name: "接力相关",
-                    color: "indigo",
-                    items: [
-                        { question: "混合接力赛能不能1男3女或者3男1女", answer: "您好，为了保证赛事公平性，仅限2男2女。" },
-                        { question: "接力有一个人来不了怎么办", answer: "优先建议您寻找新的队员（需要和原队员性别一致）。三个选手也可以参赛，但无法记录成绩，可以作为兴趣体验参加。" },
-                        { question: "接力队伍可以临时组队吗", answer: "可以。如果您找不到队友，可以在报名截止前临时组队。" },
-                        { question: "接力的交接规则是什么", answer: "接力交接需要在指定的交接区进行。交接时计时芯片会自动记录。" },
-                        { question: "接力队员可以中途替换吗", answer: "不可以。一旦比赛开始，队员不能中途替换。" },
-                        { question: "接力队伍需要统一服装吗", answer: "不需要。但建议队伍穿着统一以便识别。" },
-                        { question: "接力的报名费是多少", answer: "接力报名费通常比个人赛略低。具体价格请查看赛事详情页面。" },
-                        { question: "可以组织公司团队参赛吗", answer: "可以。公司团队可以组织多个接力队伍参赛。可以联系组委会了解团队优惠。" }
-                    ]
-                },
-                {
-                    id: "technical",
-                    name: "技术与成绩",
-                    color: "pink",
-                    items: [
-                        { question: "如何查看成绩", answer: "赛后可以在官方网站的成绩查询页面查看。通常在赛后24小时内发布。" },
-                        { question: "成绩有误怎么办", answer: "如果您认为成绩有误，请发送英文邮件至 results@hyrox.com，说明具体情况。" },
-                        { question: "可以获得成绩证书吗", answer: "是的。完赛选手会获得官方成绩证书。可以在官方网站下载或邮寄。" },
-                        { question: "成绩什么时候发布", answer: "通常在赛后24小时内发布初步成绩。最终成绩在赛后3-5天发布。" },
-                        { question: "可以查看分段成绩吗", answer: "是的。官方网站会提供详细的分段成绩和排名。" },
-                        { question: "成绩可以分享吗", answer: "可以。您可以分享您的成绩链接到社交媒体。" },
-                        { question: "如何获得官方成绩证明", answer: "可以在官方网站下载PDF版本的成绩证明，或联系组委会邮寄纸质版本。" },
-                        { question: "成绩会保留多久", answer: "官方网站会永久保留您的成绩记录。" }
-                    ]
-                },
-                {
-                    id: "other",
-                    name: "其他问题",
-                    color: "cyan",
-                    items: [
-                        { question: "比赛可以直播吗", answer: "官方会进行直播。具体直播链接请关注官方公众号。" },
-                        { question: "可以带家人观看吗", answer: "可以。观众可以在指定观众区观看。具体位置会在赛前说明。" },
-                        { question: "停车位置在哪里", answer: "停车信息会在赛前详细说明。建议提前到达以便停车。" },
-                        { question: "比赛地点交通怎么样", answer: "赛事地点通常选择交通便利的位置。具体交通信息请查看赛事详情。" },
-                        { question: "可以带宠物吗", answer: "不可以。为了安全和卫生，赛事场地不允许带宠物。" },
-                        { question: "有更衣室吗", answer: "有。赛事场地会提供更衣室和淋浴设施。" },
-                        { question: "可以寄存物品吗", answer: "可以。会提供免费的物品寄存服务。" },
-                        { question: "如何联系组委会", answer: "可以通过官方公众号、小程序或邮件 contact@hyrox.com 联系组委会。" },
-                        { question: "有志愿者招募吗", answer: "有。如果您有兴趣成为志愿者，可以关注官方公众号了解招募信息。" }
-                    ]
-                }
+
+<body class="bg-gray-50">
+<div id="app" class="max-w-6xl mx-auto p-4"></div>
+
+<script>
+const faqData = {
+    categories: [
+        {
+            id: "registration",
+            name: "报名相关",
+            color: "blue",
+            items: [
+                { question: "比赛怎么报名", answer: "您可以查询HYROX健身跑小程序报名。也可以关注公众号、小红书《HYROX健身跑》了解更多赛事信息。" },
+                { question: "杭州/深圳/上海/其他城市站什么时候开始报名", answer: "请您关注公众号、小红书等社交平台的\"HYROX健身跑\"账号官宣。" },
+                { question: "为什么显示一个金额，到了付款时候金额变了", answer: "您好，报名人数太多，早鸟价和优惠价名额被抢完，就自动恢复原价了。" },
+                { question: "提前多久到场", answer: "建议提前60-90分钟到场。" },
+                { question: "报名后可以改名字吗", answer: "报名后不可以改名字。请确保报名时填写的信息准确无误。" },
+                { question: "可以代报名吗", answer: "不可以。参赛者需要自行报名，并提供真实信息。" },
+                { question: "报名费包括什么", answer: "报名费包括参赛权利、完赛证书、完赛物资等。具体包含内容请查看赛事详情页面。" },
+                { question: "有学生优惠吗", answer: "请关注官方公众号了解最新的优惠政策。" }
             ]
-        };
+        },
 
-        const colorMap = {
-            blue: { badge: "bg-blue-500", border: "border-l-blue-500" },
-            green: { badge: "bg-green-500", border: "border-l-green-500" },
-            purple: { badge: "bg-purple-500", border: "border-l-purple-500" },
-            amber: { badge: "bg-amber-500", border: "border-l-amber-500" },
-            red: { badge: "bg-red-500", border: "border-l-red-500" },
-            indigo: { badge: "bg-indigo-500", border: "border-l-indigo-500" },
-            pink: { badge: "bg-pink-500", border: "border-l-pink-500" },
-            cyan: { badge: "bg-cyan-500", border: "border-l-cyan-500" }
-        };
+        {
+            id: "modification",
+            name: "变更/退款/延期",
+            color: "green",
+            items: [
+                { question: "我可以延期吗？", answer: "您好，延期只允许延期到您订单城市的接下来两站之一。任何订单的变更操作都只有一次（需支付差价以及50元变更手续费），原队员和组别需要保持一致。" },
+                { question: "我生病了，需要退票", answer: "请提供诊断证明（有医生的\"建议休息xx天\"字样）、订单截图等信息，我们帮您登记后审核处理（医疗退费为退款50%）。" },
+                { question: "可以换组别吗？", answer: "为保障赛事公平性，HYROX对参赛组别实行严格管理。一旦报名确认，组别将不予调整。" },
+                { question: "可以改队友吗", answer: "接力队伍中的队友可以更换，但需要满足组别要求（如混合接力需2男2女）。更换队友需要支付手续费。" },
+                { question: "退款需要多久到账", answer: "审核通过后，退款通常在7-15个工作日内到账。" },
+                { question: "可以转让报名资格吗", answer: "报名资格不可转让。如需变更，请按照延期或退款流程处理。" },
+                { question: "变更手续费是多少", answer: "变更手续费为50元。如有差价，需另外支付。" },
+                { question: "超过变更截止日期还能改吗", answer: "超过截止日期后，只有医疗异常可以申请变更。需要提供医疗证明。" }
+            ]
+        },
 
-        let expandedItems = new Set();
+        {
+            id: "awards",
+            name: "奖励/物资领取",
+            color: "purple",
+            items: [
+                { question: "我错过了颁奖，怎么补领旗子？", answer: "您可以到咨询台咨询。如果已经离开，请提供身份证明、成绩证明截图，留下收件人信息，我们会安排到付寄出快递。" },
+                { question: "我忘了拿完赛patch，怎么补领？", answer: "请出示成绩证明截图，扫描收款码支付（一个魔术贴20元），留下收件人信息，我们会到付寄出快递。" },
+                { question: "奖牌什么时候发", answer: "完赛选手在赛后会立即获得完赛证书和物资。奖牌通常在赛后一周内寄出。" },
+                { question: "可以邮寄物资吗", answer: "是的，如果您无法现场领取，可以提供邮寄地址，我们会安排到付快递。" },
+                { question: "物资可以自己选择吗", answer: "完赛物资是固定的，无法选择。具体物资内容请查看赛事详情。" },
+                { question: "没有完赛有物资吗", answer: "没有完赛的选手无法获得完赛物资。可以购买纪念物品。" }
+            ]
+        },
 
-        function toggleItem(id) {
-            if (expandedItems.has(id)) {
-                expandedItems.delete(id);
-            } else {
-                expandedItems.add(id);
-            }
-            render();
+        {
+            id: "health-safety",
+            name: "健康与安全",
+            color: "amber",
+            items: [
+                { question: "赛道和器械是否安全？", answer: "HYROX是室内竞赛，全程场地和赛道均按照国际赛事标准布置，并由专业安保、现场裁判及医疗团队逐一检查。" },
+                { question: "我有高血压/哮喘，可以参加吗？", answer: "请自行评估身体状况是否适合高强度竞赛。根据HYROX官方规则，针对哮喘等治疗性药物通常允许携带与使用。" },
+                { question: "如果比赛中身体不适怎么办？", answer: "请向最近的工作人员或医护人员报告具体症状，现场医疗团队会对您进行评估与急救措施。" },
+                { question: "赛前需要做什么准备", answer: "建议进行充分的体能训练和适应性练习。赛前一周避免过度训练，保证充足睡眠。" },
+                { question: "可以带医疗器械吗", answer: "可以。如需携带医疗器械（如心脏起搏器、胰岛素注射器等），请提前告知组委会。" },
+                { question: "有医疗保险吗", answer: "HYROX会为所有参赛者购买基础保险。建议自行购买额外的运动保险。" },
+                { question: "比赛中可以停下来休息吗", answer: "可以。您可以在任何时间停下来休息，但计时不会停止。" },
+                { question: "如果中途放弃怎么办", answer: "如果您无法继续，请告知最近的工作人员。您将被记录为未完赛。" }
+            ]
+        },
+
+        {
+            id: "supplies",
+            name: "补给与物资",
+            color: "red",
+            items: [
+                { question: "现场有哪些补给", answer: "有水，电解质，功能性饮料。赛后会有香蕉。其他的建议您自备。自带营养补充的选手必须从比赛开始时就自行携带。" },
+                { question: "可以自带饮料吗", answer: "可以。您可以自带饮料，但不能在比赛中接受他人提供的饮料（补给站除外），否则会被罚时。" },
+                { question: "补给站在哪里", answer: "补给站位置会在赛前说明会中详细介绍。通常在比赛的关键位置设置。" },
+                { question: "可以自带能量棒吗", answer: "可以。能量棒、能量胶等补充品可以自行携带。" },
+                { question: "补给站的饮料免费吗", answer: "是的，补给站的所有饮料和补给都是免费的。" },
+                { question: "赛后有什么补给", answer: "赛后会提供香蕉、饼干、水和电解质饮料等补给。" }
+            ]
+        },
+
+        {
+            id: "relay",
+            name: "接力相关",
+            color: "indigo",
+            items: [
+                { question: "混合接力赛能不能1男3女或者3男1女", answer: "您好，为了保证赛事公平性，仅限2男2女。" },
+                { question: "接力有一个人来不了怎么办", answer: "优先建议您寻找新的队员（需要和原队员性别一致）。三个选手也可以参赛，但无法记录成绩，可以作为兴趣体验参加。" },
+                { question: "接力队伍可以临时组队吗", answer: "可以。如果您找不到队友，可以在报名截止前临时组队。" },
+                { question: "接力的交接规则是什么", answer: "接力交接需要在指定的交接区进行。交接时计时芯片会自动记录。" },
+                { question: "接力队员可以中途替换吗", answer: "不可以。一旦比赛开始，队员不能中途替换。" },
+                { question: "接力队伍需要统一服装吗", answer: "不需要。但建议队伍穿着统一以便识别。" },
+                { question: "接力的报名费是多少", answer: "接力报名费通常比个人赛略低。具体价格请查看赛事详情页面。" },
+                { question: "可以组织公司团队参赛吗", answer: "可以。公司团队可以组织多个接力队伍参赛。可以联系组委会了解团队优惠。" }
+            ]
+        },
+
+        {
+            id: "technical",
+            name: "技术与成绩",
+            color: "pink",
+            items: [
+                { question: "如何查看成绩", answer: "赛后可以在官方网站的成绩查询页面查看。通常在赛后24小时内发布。" },
+                { question: "成绩有误怎么办", answer: "如果您认为成绩有误，请发送英文邮件至 results@hyrox.com，说明具体情况。" },
+                { question: "可以获得成绩证书吗", answer: "是的。完赛选手会获得官方成绩证书。可以在官方网站下载或邮寄。" },
+                { question: "成绩什么时候发布", answer: "通常在赛后24小时内发布初步成绩。最终成绩在赛后3-5天发布。" },
+                { question: "可以查看分段成绩吗", answer: "是的。官方网站会提供详细的分段成绩和排名。" },
+                { question: "成绩可以分享吗", answer: "可以。您可以分享您的成绩链接到社交媒体。" },
+                { question: "如何获得官方成绩证明", answer: "可以在官方网站下载PDF版本的成绩证明，或联系组委会邮寄纸质版本。" },
+                { question: "成绩会保留多久", answer: "官方网站会永久保留您的成绩记录。" }
+            ]
+        },
+
+        {
+            id: "other",
+            name: "其他问题",
+            color: "cyan",
+            items: [
+                { question: "比赛可以直播吗", answer: "官方会进行直播。具体直播链接请关注官方公众号。" },
+                { question: "可以带家人观看吗", answer: "可以。观众可以在指定观众区观看。具体位置会在赛前说明。" },
+                { question: "停车位置在哪里", answer: "停车信息会在赛前详细说明。建议提前到达以便停车。" },
+                { question: "比赛地点交通怎么样", answer: "赛事地点通常选择交通便利的位置。具体交通信息请查看赛事详情。" },
+                { question: "可以带宠物吗", answer: "不可以。为了安全和卫生，赛事场地不允许带宠物。" },
+                { question: "有更衣室吗", answer: "有。赛事场地会提供更衣室和淋浴设施。" },
+                { question: "可以寄存物品吗", answer: "可以。会提供免费的物品寄存服务。" },
+                { question: "如何联系组委会", answer: "可以通过官方公众号、小程序或邮件 contact@hyrox.com 联系组委会。" },
+                { question: "有志愿者招募吗", answer: "有。如果您有兴趣成为志愿者，可以关注官方公众号了解招募信息。" }
+            ]
         }
+    ]
+};
 
-        function filterFAQ(searchTerm) {
-            if (!searchTerm) return faqData.categories;
-            const term = searchTerm.toLowerCase();
-            return faqData.categories
-                .map(category => ({
-                    ...category,
-                    items: category.items.filter(
-                        item =>
-                            item.question.toLowerCase().includes(term) ||
-                            item.answer.toLowerCase().includes(term)
-                    )
-                }))
-                .filter(category => category.items.length > 0);
-        }
+const state = {
+    expanded: new Set(),
+    keyword: ""
+};
 
-        function render() {
-            const searchInput = document.getElementById('search-input');
-            const searchTerm = searchInput?.value || '';
-            const filteredData = filterFAQ(searchTerm);
-            const totalQuestions = faqData.categories.reduce((sum, cat) => sum + cat.items.length, 0);
+function init() {
+    document.getElementById("app").innerHTML = `
+        <h1 class="text-3xl font-bold mb-4">HYROX FAQ</h1>
+        <input id="search" class="w-full p-3 border rounded mb-6" placeholder="搜索问题..." />
+        <div id="faq"></div>
+    `;
 
-            const html = `
-                <div class="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-                    <header class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white py-12 shadow-lg">
-                        <div class="max-w-6xl mx-auto px-4">
-                            <h1 class="text-4xl font-bold mb-2">❓ HYROX 常见问题</h1>
-                            <p class="text-lg opacity-95">找到您需要的答案，快速解决问题</p>
-                        </div>
-                    </header>
+    document.getElementById("search").addEventListener("input", e => {
+        state.keyword = e.target.value.toLowerCase();
+        render();
+    });
 
-                    <main class="max-w-6xl mx-auto px-4 py-8">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                            <div class="bg-white rounded-lg shadow p-6 text-center">
-                                <div class="text-3xl font-bold text-sky-500">${totalQuestions}+</div>
-                                <div class="text-gray-600 text-sm mt-2">常见问题</div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow p-6 text-center">
-                                <div class="text-3xl font-bold text-indigo-500">${faqData.categories.length}</div>
-                                <div class="text-gray-600 text-sm mt-2">问题分类</div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow p-6 text-center">
-                                <div class="text-3xl font-bold text-emerald-500">✓</div>
-                                <div class="text-gray-600 text-sm mt-2">全部可搜索</div>
-                            </div>
-                        </div>
+    document.addEventListener("click", e => {
+        const btn = e.target.closest("[data-id]");
+        if (!btn) return;
 
-                        <div class="sticky top-0 z-10 bg-gradient-to-b from-slate-100 to-transparent py-4 mb-8">
-                            <input
-                                type="text"
-                                id="search-input"
-                                placeholder="搜索问题..."
-                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200 transition"
-                                oninput="render()"
-                            />
-                        </div>
-
-                        ${filteredData.length > 0 ? `
-                            <div class="space-y-8">
-                                ${filteredData.map((category, catIdx) => {
-                                    const colors = colorMap[category.color] || colorMap.blue;
-                                    return `
-                                        <div>
-                                            <div class="flex items-center gap-3 mb-4">
-                                                <div class="${colors.badge} text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm">
-                                                    ${catIdx + 1}
-                                                </div>
-                                                <h2 class="text-2xl font-bold text-gray-800">${category.name}</h2>
-                                            </div>
-
-                                            <div class="space-y-3">
-                                                ${category.items.map((item, itemIdx) => {
-                                                    const itemId = category.id + "-" + itemIdx;
-                                                    const isExpanded = expandedItems.has(itemId);
-                                                    return `
-                                                        <div class="border-l-4 ${colors.border} rounded-lg bg-white shadow-sm hover:shadow-md transition-all overflow-hidden">
-                                                            <button
-                                                                data-id="${itemId}" class="faq-btn"
-                                                                class="w-full px-4 py-3 text-left font-semibold text-gray-800 hover:bg-gray-50 flex justify-between items-center"
-                                                            >
-                                                                <span>${item.question}</span>
-                                                                <span class="text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}\">▼</span>
-                                                            </button>
-                                                            ${isExpanded ? `
-                                                                <div class="px-4 py-3 bg-gray-50 border-t border-gray-200 text-gray-700 leading-relaxed">
-                                                                    ${item.answer}
-                                                                </div>
-                                                            ` : ''}
-                                                        </div>
-                                                    `;
-                                                }).join('')}
-                                            </div>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        ` : `
-                            <div class="text-center py-12 text-gray-500">
-                                <p class="text-lg">未找到匹配的问题，请尝试其他搜索词</p>
-                            </div>
-                        `}
-                    </main>
-
-                    <footer class="border-t border-gray-200 py-6 mt-12 text-center text-gray-600">
-                        <p>&copy; 2026 HYROX 常见问题 | 所有内容仅供参考</p>
-                    </footer>
-                </div>
-            `;
-console.log(html);
-            document.getElementById('root').innerHTML = html;
-        }
+        const id = btn.dataset.id;
+        if (state.expanded.has(id)) state.expanded.delete(id);
+        else state.expanded.add(id);
 
         render();
-    </script>
+    });
+
+    render();
+}
+
+function render() {
+    const box = document.getElementById("faq");
+    const kw = state.keyword;
+
+    const filtered = faqData.categories.map(c => ({
+        ...c,
+        items: c.items.filter(i =>
+            i.question.toLowerCase().includes(kw) ||
+            i.answer.toLowerCase().includes(kw)
+        )
+    })).filter(c => c.items.length);
+
+    box.innerHTML = filtered.map(c => `
+        <div class="mb-6">
+            <h2 class="text-xl font-bold mb-3">${c.name}</h2>
+
+            ${c.items.map((i, idx) => {
+                const id = c.id + "-" + idx;
+                const open = state.expanded.has(id);
+
+                return `
+                    <div class="border rounded mb-2 bg-white">
+                        <button class="w-full text-left p-3 flex justify-between" data-id="${id}">
+                            <span>${i.question}</span>
+                            <span>${open ? "▲" : "▼"}</span>
+                        </button>
+
+                        ${open ? `
+                            <div class="p-3 border-t text-gray-600">
+                                ${i.answer}
+                            </div>
+                        ` : ""}
+                    </div>
+                `;
+            }).join("")}
+        </div>
+    `).join("");
+}
+
+init();
+</script>
 </body>
 </html>
