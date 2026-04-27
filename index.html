@@ -227,7 +227,7 @@
 
                                             <div class="space-y-3">
                                                 ${category.items.map((item, itemIdx) => {
-                                                    const itemId = \`\${category.id}-\${itemIdx}\`;
+                                                    const itemId = category.id + "-" + itemIdx;
                                                     const isExpanded = expandedItems.has(itemId);
                                                     return \`
                                                         <div class="border-l-4 \${colors.border} rounded-lg bg-white shadow-sm hover:shadow-md transition-all overflow-hidden">
