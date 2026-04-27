@@ -230,32 +230,32 @@
                                                     const itemId = category.id + "-" + itemIdx;
                                                     const isExpanded = expandedItems.has(itemId);
                                                     return `
-                                                        <div class="border-l-4 \${colors.border} rounded-lg bg-white shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                        <div class="border-l-4 ${colors.border} rounded-lg bg-white shadow-sm hover:shadow-md transition-all overflow-hidden">
                                                             <button
-                                                                onclick="toggleItem('\${itemId}')"
+                                                                data-id="${itemId}" class="faq-btn"
                                                                 class="w-full px-4 py-3 text-left font-semibold text-gray-800 hover:bg-gray-50 flex justify-between items-center"
                                                             >
-                                                                <span>\${item.question}</span>
-                                                                <span class="text-gray-500 transition-transform \${isExpanded ? 'rotate-180' : ''}\">▼</span>
+                                                                <span>${item.question}</span>
+                                                                <span class="text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}\">▼</span>
                                                             </button>
-                                                            \${isExpanded ? \`
+                                                            ${isExpanded ? `
                                                                 <div class="px-4 py-3 bg-gray-50 border-t border-gray-200 text-gray-700 leading-relaxed">
-                                                                    \${item.answer}
+                                                                    ${item.answer}
                                                                 </div>
-                                                            \` : ''}
+                                                            ` : ''}
                                                         </div>
-                                                    \`;
+                                                    `;
                                                 }).join('')}
                                             </div>
                                         </div>
-                                    \`;
+                                    `;
                                 }).join('')}
                             </div>
-                        \` : \`
+                        ` : `
                             <div class="text-center py-12 text-gray-500">
                                 <p class="text-lg">未找到匹配的问题，请尝试其他搜索词</p>
                             </div>
-                        \`}
+                        `}
                     </main>
 
                     <footer class="border-t border-gray-200 py-6 mt-12 text-center text-gray-600">
@@ -263,7 +263,7 @@
                     </footer>
                 </div>
             `;
-
+console.log(html);
             document.getElementById('root').innerHTML = html;
         }
 
