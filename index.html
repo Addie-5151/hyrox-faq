@@ -1,228 +1,587 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYROX 常见问题</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-    </style>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYROX 常见问题</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0d0d0d;
+  --off-black: #1a1a1a;
+  --dark: #242424;
+  --mid: #3d3d3d;
+  --muted: #6b6b6b;
+  --border: #2e2e2e;
+  --border-light: #e8e5e0;
+  --cream: #f5f2ed;
+  --white: #ffffff;
+  --accent: #e8c84a;
+  --accent-dim: rgba(232,200,74,0.12);
+  --red: #d94f3d;
+  --radius: 6px;
+}
 
-<body class="bg-gray-50">
-<div id="app" class="max-w-6xl mx-auto p-4"></div>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--off-black);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--black);
+  padding: 0;
+  position: sticky; top: 0; z-index: 200;
+}
+.header-inner {
+  max-width: 1080px; margin: 0 auto;
+  padding: 0 32px;
+  display: flex; align-items: stretch; justify-content: space-between;
+  height: 60px;
+}
+.header-brand {
+  display: flex; align-items: center; gap: 12px;
+}
+.header-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700;
+  letter-spacing: 2px; color: var(--white);
+  text-transform: uppercase;
+}
+.header-logo span { color: var(--accent); }
+.header-tag {
+  font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted);
+  border-left: 1px solid var(--border);
+  padding-left: 14px; line-height: 1;
+}
+.header-count {
+  display: flex; align-items: center;
+  font-size: 12px; color: var(--muted); letter-spacing: 0.5px;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--black);
+  padding: 56px 32px 48px;
+  position: relative; overflow: hidden;
+  border-bottom: 3px solid var(--accent);
+}
+.hero::before {
+  content: 'FAQ';
+  position: absolute;
+  right: -20px; top: -30px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 220px; font-weight: 700;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -8px;
+  pointer-events: none; user-select: none;
+  line-height: 1;
+}
+.hero-inner { max-width: 1080px; margin: 0 auto; }
+.hero-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-label::before {
+  content: '';
+  width: 28px; height: 2px; background: var(--accent);
+}
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(40px, 6vw, 68px);
+  font-weight: 700; color: var(--white);
+  line-height: 1; letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-size: 14px; color: rgba(255,255,255,0.4);
+  font-weight: 300; max-width: 420px;
+  line-height: 1.8;
+}
+
+/* ── SEARCH ── */
+.search-bar {
+  background: var(--off-black);
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 60px; z-index: 100;
+}
+.search-inner { max-width: 1080px; margin: 0 auto; position: relative; }
+.search-icon {
+  position: absolute; left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); font-size: 15px; pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-size: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input::placeholder { color: var(--muted); }
+.search-input:focus { border-color: var(--accent); }
+
+/* ── LAYOUT ── */
+.layout {
+  max-width: 1080px; margin: 0 auto;
+  padding: 40px 32px 80px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ── SIDEBAR NAV ── */
+.sidebar {
+  position: sticky; top: 140px;
+}
+.sidebar-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 12px;
+}
+.nav-list { list-style: none; }
+.nav-item { border-bottom: 1px solid var(--border-light); }
+.nav-link {
+  display: block; padding: 10px 0;
+  font-size: 13px; color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+  cursor: pointer;
+}
+.nav-link:hover { color: var(--off-black); }
+.nav-link.active { color: var(--off-black); font-weight: 500; }
+.nav-link.active::before {
+  content: '— ';
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── CATEGORIES ── */
+.faq-main { min-width: 0; }
+
+.category-block {
+  margin-bottom: 48px;
+  animation: fadeIn 0.3s ease both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cat-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--off-black);
+}
+.cat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; color: var(--accent);
+  background: var(--black);
+  padding: 2px 8px; border-radius: 3px;
+}
+.cat-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--off-black);
+}
+.cat-count {
+  margin-left: auto;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+/* ── FAQ ITEMS ── */
+.faq-item {
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.15s;
+}
+.faq-item:first-child { border-top: 1px solid var(--border-light); }
+
+.faq-q {
+  width: 100%; text-align: left;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  padding: 16px 0;
+  background: none; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 500;
+  color: var(--off-black);
+  font-family: 'Noto Sans SC', sans-serif;
+  line-height: 1.6;
+  transition: color 0.15s;
+}
+.faq-q:hover { color: var(--black); }
+.faq-q.open { color: var(--black); }
+
+.faq-q-text { flex: 1; text-align: left; }
+
+.faq-icon {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border: 1.5px solid var(--border-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--muted);
+  margin-top: 2px;
+  transition: all 0.2s;
+}
+.faq-q.open .faq-icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  display: none;
+  padding: 0 0 20px 0;
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.85;
+  font-weight: 300;
+  max-width: 680px;
+}
+.faq-a.open { display: block; }
+.faq-a a {
+  color: var(--off-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-all;
+}
+.faq-a a:hover { color: var(--black); }
+
+/* ── NO RESULTS ── */
+.no-results {
+  text-align: center; padding: 80px 32px;
+  color: var(--muted); font-size: 14px;
+}
+.no-results strong {
+  display: block; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px; color: var(--border-light);
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--black);
+  border-top: 3px solid var(--accent);
+  padding: 28px 32px;
+  text-align: center;
+}
+.site-footer p {
+  font-size: 12px; color: var(--muted); letter-spacing: 0.5px;
+}
+.site-footer strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--white); letter-spacing: 2px;
+  font-size: 14px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; gap: 24px; }
+  .sidebar { display: none; }
+  .hero { padding: 40px 20px 36px; }
+  .hero::before { font-size: 120px; }
+  .layout { padding: 28px 20px 60px; }
+  .search-bar { padding: 16px 20px; }
+  .header-inner { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">HY<span>ROX</span></div>
+      <div class="header-tag">常见问题</div>
+    </div>
+    <div class="header-count" id="header-count"></div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Help Center</div>
+    <h1 class="hero-title">常见问题<br>解答</h1>
+    <p class="hero-sub">涵盖报名、变更、完赛物资、健康安全等各类常见问题。找不到答案请联系客服。</p>
+  </div>
+</div>
+
+<div class="search-bar">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search" type="text" placeholder="搜索问题或关键词…" autocomplete="off" />
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-label">分类导航</div>
+    <ul class="nav-list" id="nav-list"></ul>
+  </nav>
+  <main class="faq-main" id="faq-main"></main>
+</div>
+
+<footer class="site-footer">
+  <p><strong>HYROX</strong> &nbsp;·&nbsp; 常见问题帮助中心 &nbsp;·&nbsp; 如有其他疑问请联系官方客服</p>
+</footer>
 
 <script>
 const faqData = {
-    categories: [
-        {
-            id: "registration",
-            name: "购票/报名相关",
-            color: "blue",
-            items: [
-                { question: "比赛怎么报名/买票", answer: "您可以查询HYROX健身跑小程序报名。也可以关注公众号、小红书《HYROX健身跑》了解更多赛事信息。" },
-                { question: "运动员怎么备赛", answer: "您报名后会有竞赛手册给到您，与此同时您也可以查看HYROX健身跑视频号，有关于赛事、规则等各项说明和介绍。" },
-                { question: "杭州/深圳/上海/其他城市站什么时候开始报名/开票", answer: "请您关注公众号、小红书等社交平台的\"HYROX健身跑\"账号官宣。" },
-                { question: "为什么显示一个金额，到了付款时候金额变了", answer: "您好，报名人数太多，早鸟价和优惠价名额被抢完，就自动恢复原价了。" },
-                { question: "运动员检录提前多久到场", answer: "建议提前60-90分钟到场。" },
-                { question: "可以改名字吗", answer: "请确保报名时填写的信息与证件匹配，准确无误。如填写失误，与证件不一致，可在赛前一周内联系客服更改。" },
-                { question: "香港/澳门/台湾运动员无法报名/无法签署合同/无法通过实名认证", answer: "请您确保证件类型、手机号地区选择正确。也可尝试护照和人脸识别。" },
-                { question: "单个比赛日报了两个以上组别，怎么检录", answer: "可以一次检录两个项目，但需要特别注意，两个项目的计时芯片不要佩戴错误。第二个项目开始前，请务必更换芯片；如需协助，可前往Help Desk，由工作人员为您重新写bib number。" },
-                { question: "可以代替别人报名吗", answer: "不可以。参赛者需要自行报名，并提供真实信息。" },
-                { question: "双人和接力是单人价格还是总价格", answer: "双人组别及接力组别报名时，由您或队友其中一人完成下单即可。下单后可在订单中邀请队友加入，无需两人或四人同时进行购票操作。" },
-                { question: "一天两个组别，出发时间太近怎么办", answer: "请您在报名时候充分考虑时间冲突的可能性。极少数两个项目出发时间差了半小时，运动员可以提前联系客服登记，在比赛日来咨询台，我们会在其他出发时间《有空余》的情况下，帮运动员现场尽可能协调。无法保证一定有空余时间/一定调整成功。" },
-                { question: "香港站怎么报名", answer: "香港站报名事宜您可以至官网（https://hyroxhk.com/）查询。也可以邮件咨询香港主办方：info@hyroxhk.com" },
-                { question: "页面显示报满了，会二次开票吗？", answer: "以页面显示为准。目前没有候补系统，您可以自行查看是否有回流票。" },
-                { question: "小程序里队友没有头像", answer: "可以各自登陆小程序，“我的” 页面左上角⚙️点开，进入“设置”，修改昵称。" },
-                { question: "报名费包括什么", answer: "报名费包括参赛席位、参赛设备、完赛物资等。具体请查看赛事详情页面。" },
-            ]
-        },
-
-        {
-            id: "modification",
-            name: "变更/退款/延期",
-            color: "green",
-            items: [
-                { question: "我可以延期吗？", answer: "您好，延期只允许延期到您订单城市的接下来两站之一。任何订单的变更操作都只有一次（需支付差价以及50元变更手续费），延期后该订单不再接收任何变更申请。原队员和组别需要保持一致。" },
-                { question: "怎么退票", answer: "请您自行在小程序申请退票。如果已经过了退票截止日期，只有医疗特例可以退费。请提供诊断证明（有医生的\"建议休息xx天\"字样）、订单截图等信息给客服，帮您登记后处理（医疗退费为退款50%）。" },
-                { question: "可以换组别吗？", answer: "为保障赛事公平性，HYROX对参赛组别实行严格管理。一旦报名确认，组别将不予调整。（仅限：双人组别其中一人出现医疗情况，可以为剩下一人转单人组别——在单人组别还有余票的前提下。）" },
-                { question: "可以换人/换队友/队员吗", answer: "单人组别无法更换选手；双人组别可以更换其中一人；接力组别可以更换1-3名成员——但需要满足组别性别要求（如混合接力需2男2女）。更换队友需要支付手续费，队长可在小程序自行操作。注意：双人队伍不可以两个人都换；接力队伍不可以四个人都换。" },
-                { question: "退款需要多久到账", answer: "您自行在小程序申请退款，通常即时到账。如需人工操作的退款，审核通过后，通常在7-15个工作日内到账。" },
-                { question: "可以转让报名资格吗", answer: "报名资格不可转让。如需变更，请按照退款流程处理，或者联络客服工作人员办理延期。" },
-                { question: "变更手续费是多少", answer: "变更手续费为50元/次；50元/人。如有差价，需另外支付。" },
-                { question: "超过变更截止日期还能改吗", answer: "超过截止日期后，只有医疗特例可以联系客服沟通申请，需要提供医疗证明。" }
-            ]
-        },
-
-        {
-            id: "awards",
-            name: "完赛奖品/旗子/物资",
-            color: "purple",
-            items: [
-                { question: "我错过了颁奖，怎么补领旗子？", answer: "您可以到咨询台咨询。如果已经离开现场，请联系客服，提供身份证明、成绩证明截图，留下收件人信息，我们会安排到付寄出快递。" },
-                { question: "我忘了拿完赛patch/冰箱贴/魔术贴，怎么补领？", answer: "请出示身份证吗，成绩证明截图，扫描收款码支付（魔术贴20元，冰箱贴20元），留下收件人信息，我们会安排到付寄出快递。" },
-                { question: "奖牌什么时候发", answer: "选手在完赛点会立即获得完赛物资。" },
-                { question: "各组别颁奖礼是什么时候", answer: "参赛指南里有预计颁奖时间，现场会有变化，以广播通知为准，请您留意。" },
-                { question: "连续100个墙球有礼品吗", answer: "您好，完赛点附近会有赞助商礼品，以现场安排为准。" },
-                { question: "没有完成比赛/中途退赛有物资吗", answer: "没有完赛的选手无法获得完赛物资。" }
-            ]
-        },
-
-        {
-            id: "health-safety",
-            name: "健康与安全",
-            color: "amber",
-            items: [
-                { question: "赛道和器械是否安全？", answer: "HYROX是室内竞赛，全程场地和赛道均按照国际赛事标准布置，并由专业安保、现场裁判及医疗团队逐一检查。" },
-                { question: "我有高血压/哮喘，可以参加吗？", answer: "请选手自行评估身体状况是否适合高强度竞赛。根据HYROX官方规则，针对哮喘等治疗性药物通常允许携带与使用。" },
-                { question: "如果比赛中身体不适怎么办？", answer: "请向最近的工作人员或医护人员报告具体症状，现场医疗团队会对您进行评估与急救措施。" },
-                { question: "赛前需要做什么准备", answer: "建议进行充分的体能训练和适应性练习。赛前一周避免过度训练，保证充足睡眠。详情请仔细阅读参赛手册。" },
-                { question: "可以带医疗器械吗", answer: "可以。如需携带医疗器械（如心脏起搏器、胰岛素注射器等），请提前告知组委会。" },
-                { question: "有医疗保险吗", answer: "HYROX会为所有参赛者购买赛事保险。如有额外需求，请自行购买。" },
-                { question: "比赛中可以停下来休息吗", answer: "可以。您可以在任何时间停下来休息，但计时不会停止。" },
-                { question: "如果中途放弃怎么办", answer: "如果您无法继续，请告知最近的工作人员。您将被记录为未完赛。" }
-            ]
-        },
-
-        {
-            id: "supplies",
-            name: "补给与物资",
-            color: "red",
-            items: [
-                { question: "现场有哪些补给", answer: "有水，电解质，功能性饮料。赛后会有水果。其他的建议您自备。自带营养补充的选手必须从比赛开始时就自行携带。不能在比赛中接受他人提供的饮料（补给站除外），否则会被视作“外部协助”，给予罚时。" },
-                { question: "可以自带饮料/补给/能量棒吗", answer: "可以。您可以自带饮料，但不能在比赛中接受他人提供的饮料（补给站除外），否则会被视作“外部协助”，给予罚时。" },
-                { question: "补给站在哪里", answer: "补给站位置会在赛前说明会中详细介绍。通常在比赛的关键位置设置。" },
-                { question: "补给站的饮料免费吗", answer: "是的，补给站的所有饮料和补给都是免费的。" },
-            ]
-        },
-
-        {
-            id: "relay",
-            name: "接力相关",
-            color: "indigo",
-            items: [
-                { question: "混合接力赛能不能1男3女或者3男1女", answer: "您好，为了保证赛事公平性，仅限2男2女。" },
-                { question: "接力有一个人来不了怎么办", answer: "优先建议您寻找新的队员（需要和原队员性别一致）。三个选手也可以参赛，但无法记录成绩，可以作为兴趣体验参加，但仍旧需要四个身份证检录。" },
-                { question: "接力队伍可以临时组队吗", answer: "可以。如果您找不到队友，可以在报名截止前临时组队。" },
-                { question: "接力的交接规则是什么", answer: "接力交接需要在指定的交接区进行。交接时计时芯片会自动记录。请仔细阅读参赛规则手册。" },
-                { question: "接力队员可以在比赛中途替换吗", answer: "不可以。一旦比赛开始，队员不能中途替换。" },
-                { question: "接力队伍需要/要求统一服装吗", answer: "不需要。您可以自行选择着装，但建议同一队伍适当统一，方便队员之间识别与配合。" },
-            ]
-        },
-
-        {
-            id: "technical",
-            name: "比赛成绩和排名",
-            color: "pink",
-            items: [
-                { question: "如何查看成绩和排名", answer: "赛后可以在官方网站results.hyrox.com页面查看总用时、排名，各项目用时和排名。通常在赛后实时发布。" },
-                { question: "成绩有误怎么办/我对成绩有异议", answer: "如果您认为成绩有误，请发送英文邮件至results@hyrox.com，说明具体情况，会有HYROX官方裁判组进行复查并邮件回复您。" },
-                { question: "可以获得成绩证书吗", answer: "完赛选手可以在官方网站下载certificate。" },
-                { question: "成绩什么时候发布", answer: "通常在赛后实时发布初步成绩。可能会有变化，以最终发布为准。" },
-                { question: "可以查看分段/不同项目的成绩吗", answer: "是的。官方网站results.hyrox.com会提供详细的分段成绩和排名。" },
-                { question: "残疾人运动员有没有特殊规则", answer: "目前HYROX中国没有视障/其他障碍的特殊规则，所有选手按统一标准参赛的。您可以带一位陪跑员，陪跑员可以在场边提供引导（比如提示方向、带到正确位置、整理绳索、帮您找到球等），但不能参与任何比赛动作或帮助完成项目。" },
-                { question: "残疾人运动员该怎么备赛", answer: "建议赛前多多按照比赛规则进行训练，提前熟悉项目的动作要求和节奏，比如墙球的投掷力度、目标高度等，这样会更有助于您在比赛中顺利完成项目。教练和陪跑员也可以在训练时一起配合指引，建立空间感，进行动作引导和校正，减少出错频次， 保证安全。" },
-                { question: "怎么购买/领取我的照片", answer: "您可于赛后前往网站https://sportograf.com找到HYROX对应赛事的相册,通过您报名参赛时使用的电子邮箱地址与人脸识别检索您的所有照片，并决定是否购买(照片通常于赛后2-7天内更新完毕,请耐心等待。微信小程序特别优惠：在结账时输入您的参赛电子票码，即可享受专属折扣。" },
-                { question: "如何获得官方成绩证明", answer: "可以在官方网站下载PDF版本的成绩证明。" },
-            ]
-        },
-
-        {
-            id: "other",
-            name: "其他问题",
-            color: "cyan",
-            items: [
-                { question: "比赛可以直播吗", answer: "官方会进行直播。具体直播链接请关注官方公众号。" },
-                { question: "可以带家人/朋友观看吗", answer: "可以。家人朋友需要在小程序购买观众票，在指定观众区观看。" },
-                { question: "我是运动员，可以免费观赛吗", answer: "可以，您可以免费观看您本人比赛日当天的全部赛事。如果您Day 1参赛，Day 2不参赛但是想要观赛，需要购买Day 2的观众票。" },
-                { question: "停车位置在哪里", answer: "停车信息会在赛前详细说明。建议提前查询交通路线以便停车。" },
-                { question: "比赛地点交通怎么样", answer: "赛事地点通常选择交通便利的位置。具体交通信息请您提前查看比赛场馆，做好出行准备。" },
-                { question: "可以带宠物吗", answer: "不可以。为了安全和卫生，赛事场地不允许带宠物。" },
-                { question: "怎么开发票", answer: "您好，比赛结束后可以申请开具发票，请扫码填写信息。请您仔细阅读需要填写的信息及上传图片的要求，如信息不全无法开票，请您知悉～ https://dcwjxcx.com/web/jump-mp.html?id=9x9YU8m3mH3qNDiGBzej。发票会在申请之日起5个工作日发到您邮箱。" },
-                { question: "有更衣室吗", answer: "有。赛事场地会为选手提供更衣室。" },
-                { question: "可以寄存物品吗", answer: "可以。我们会为选手提供免费的物品寄存服务；观众无法存包，请观众保管好自己随身物品。" },
-                { question: "拿到了世锦赛名额，可以换队友，换组别吗", answer: "世锦赛严格要求必须是分站晋级原选手，不可更改，也不可以换组别。" },
-                { question: "如果我拿了年龄组第一，会受邀世锦赛吗？", answer: "世锦赛名额以世锦赛邀约邮件为准。通常赛后3-5个工作日以内就会收到邮件。请注意，需要您根据邮件指示，自行购票、安排签证、机酒出行。" },
-                { question: "如何联系组委会", answer: "可以通过官方公众号、小程序联系组委会客服。" },
-            ]
-        }
-    ]
+  categories: [
+    {
+      id: "registration", name: "购票/报名相关",
+      items: [
+        { question: "比赛怎么报名/买票", answer: "您可以查询HYROX健身跑小程序报名。也可以关注公众号、小红书《HYROX健身跑》了解更多赛事信息。" },
+        { question: "运动员怎么备赛", answer: "您报名后会有竞赛手册给到您，与此同时您也可以查看HYROX健身跑视频号，有关于赛事、规则等各项说明和介绍。" },
+        { question: "杭州/深圳/上海/其他城市站什么时候开始报名/开票", answer: "请您关注公众号、小红书等社交平台的\"HYROX健身跑\"账号官宣。" },
+        { question: "为什么显示一个金额，到了付款时候金额变了", answer: "您好，报名人数太多，早鸟价和优惠价名额被抢完，就自动恢复原价了。" },
+        { question: "运动员检录提前多久到场", answer: "建议提前60-90分钟到场。" },
+        { question: "可以改名字吗", answer: "请确保报名时填写的信息与证件匹配，准确无误。如填写失误，与证件不一致，可在赛前一周内联系客服更改。" },
+        { question: "香港/澳门/台湾运动员无法报名/无法签署合同/无法通过实名认证", answer: "请您确保证件类型、手机号地区选择正确。也可尝试护照和人脸识别。" },
+        { question: "单个比赛日报了两个以上组别，怎么检录", answer: "可以一次检录两个项目，但需要特别注意，两个项目的计时芯片不要佩戴错误。第二个项目开始前，请务必更换芯片；如需协助，可前往Help Desk，由工作人员为您重新写bib number。" },
+        { question: "可以代替别人报名吗", answer: "不可以。参赛者需要自行报名，并提供真实信息。" },
+        { question: "双人和接力是单人价格还是总价格", answer: "双人组别及接力组别报名时，由您或队友其中一人完成下单即可。下单后可在订单中邀请队友加入，无需两人或四人同时进行购票操作。" },
+        { question: "一天两个组别，出发时间太近怎么办", answer: "请您在报名时候充分考虑时间冲突的可能性。极少数两个项目出发时间差了半小时，运动员可以提前联系客服登记，在比赛日来咨询台，我们会在其他出发时间《有空余》的情况下，帮运动员现场尽可能协调。无法保证一定有空余时间/一定调整成功。" },
+        { question: "香港站怎么报名", answer: "香港站报名事宜您可以至官网（https://hyroxhk.com/）查询。也可以邮件咨询香港主办方：info@hyroxhk.com" },
+        { question: "页面显示报满了，会二次开票吗？", answer: "以页面显示为准。目前没有候补系统，您可以自行查看是否有回流票。" },
+        { question: "小程序里队友没有头像", answer: "可以各自登陆小程序，『我的』页面左上角⚙️点开，进入『设置』，修改昵称。" },
+        { question: "报名费包括什么", answer: "报名费包括参赛席位、参赛设备、完赛物资等。具体请查看赛事详情页面。" },
+      ]
+    },
+    {
+      id: "modification", name: "变更/退款/延期",
+      items: [
+        { question: "我可以延期吗？", answer: "您好，延期只允许延期到您订单城市的接下来两站之一。任何订单的变更操作都只有一次（需支付差价以及50元变更手续费），延期后该订单不再接收任何变更申请。原队员和组别需要保持一致。" },
+        { question: "怎么退票", answer: "请您自行在小程序申请退票。如果已经过了退票截止日期，只有医疗特例可以退费。请提供诊断证明（有医生的\"建议休息xx天\"字样）、订单截图等信息给客服，帮您登记后处理（医疗退费为退款50%）。" },
+        { question: "可以换组别吗？", answer: "为保障赛事公平性，HYROX对参赛组别实行严格管理。一旦报名确认，组别将不予调整。（仅限：双人组别其中一人出现医疗情况，可以为剩下一人转单人组别——在单人组别还有余票的前提下。）" },
+        { question: "可以换人/换队友/队员吗", answer: "单人组别无法更换选手；双人组别可以更换其中一人；接力组别可以更换1-3名成员——但需要满足组别性别要求（如混合接力需2男2女）。更换队友需要支付手续费，队长可在小程序自行操作。注意：双人队伍不可以两个人都换；接力队伍不可以四个人都换。" },
+        { question: "退款需要多久到账", answer: "您自行在小程序申请退款，通常即时到账。如需人工操作的退款，审核通过后，通常在7-15个工作日内到账。" },
+        { question: "可以转让报名资格吗", answer: "报名资格不可转让。如需变更，请按照退款流程处理，或者联络客服工作人员办理延期。" },
+        { question: "变更手续费是多少", answer: "变更手续费为50元/次；50元/人。如有差价，需另外支付。" },
+        { question: "超过变更截止日期还能改吗", answer: "超过截止日期后，只有医疗特例可以联系客服沟通申请，需要提供医疗证明。" }
+      ]
+    },
+    {
+      id: "awards", name: "完赛奖品/旗子/物资",
+      items: [
+        { question: "我错过了颁奖，怎么补领旗子？", answer: "您可以到咨询台咨询。如果已经离开现场，请联系客服，提供身份证明、成绩证明截图，留下收件人信息，我们会安排到付寄出快递。" },
+        { question: "我忘了拿完赛patch/冰箱贴/魔术贴，怎么补领？", answer: "请出示身份证吗，成绩证明截图，扫描收款码支付（魔术贴20元，冰箱贴20元），留下收件人信息，我们会安排到付寄出快递。" },
+        { question: "奖牌什么时候发", answer: "选手在完赛点会立即获得完赛物资。" },
+        { question: "各组别颁奖礼是什么时候", answer: "参赛指南里有预计颁奖时间，现场会有变化，以广播通知为准，请您留意。" },
+        { question: "连续100个墙球有礼品吗", answer: "您好，完赛点附近会有赞助商礼品，以现场安排为准。" },
+        { question: "没有完成比赛/中途退赛有物资吗", answer: "没有完赛的选手无法获得完赛物资。" }
+      ]
+    },
+    {
+      id: "health-safety", name: "健康与安全",
+      items: [
+        { question: "赛道和器械是否安全？", answer: "HYROX是室内竞赛，全程场地和赛道均按照国际赛事标准布置，并由专业安保、现场裁判及医疗团队逐一检查。" },
+        { question: "我有高血压/哮喘，可以参加吗？", answer: "请选手自行评估身体状况是否适合高强度竞赛。根据HYROX官方规则，针对哮喘等治疗性药物通常允许携带与使用。" },
+        { question: "如果比赛中身体不适怎么办？", answer: "请向最近的工作人员或医护人员报告具体症状，现场医疗团队会对您进行评估与急救措施。" },
+        { question: "赛前需要做什么准备", answer: "建议进行充分的体能训练和适应性练习。赛前一周避免过度训练，保证充足睡眠。详情请仔细阅读参赛手册。" },
+        { question: "可以带医疗器械吗", answer: "可以。如需携带医疗器械（如心脏起搏器、胰岛素注射器等），请提前告知组委会。" },
+        { question: "有医疗保险吗", answer: "HYROX会为所有参赛者购买赛事保险。如有额外需求，请自行购买。" },
+        { question: "比赛中可以停下来休息吗", answer: "可以。您可以在任何时间停下来休息，但计时不会停止。" },
+        { question: "如果中途放弃怎么办", answer: "如果您无法继续，请告知最近的工作人员。您将被记录为未完赛。" }
+      ]
+    },
+    {
+      id: "supplies", name: "补给与物资",
+      items: [
+        { question: "现场有哪些补给", answer: "有水，电解质，功能性饮料。赛后会有水果。其他的建议您自备。自带营养补充的选手必须从比赛开始时就自行携带。不能在比赛中接受他人提供的饮料（补给站除外），否则会被视作『外部协助』，给予罚时。" },
+        { question: "可以自带饮料/补给/能量棒吗", answer: "可以。您可以自带饮料，但不能在比赛中接受他人提供的饮料（补给站除外），否则会被视作『外部协助』，给予罚时。" },
+        { question: "补给站在哪里", answer: "补给站位置会在赛前说明会中详细介绍。通常在比赛的关键位置设置。" },
+        { question: "补给站的饮料免费吗", answer: "是的，补给站的所有饮料和补给都是免费的。" },
+      ]
+    },
+    {
+      id: "relay", name: "接力相关",
+      items: [
+        { question: "混合接力赛能不能1男3女或者3男1女", answer: "您好，为了保证赛事公平性，仅限2男2女。" },
+        { question: "接力有一个人来不了怎么办", answer: "优先建议您寻找新的队员（需要和原队员性别一致）。三个选手也可以参赛，但无法记录成绩，可以作为兴趣体验参加，但仍旧需要四个身份证检录。" },
+        { question: "接力队伍可以临时组队吗", answer: "可以。如果您找不到队友，可以在报名截止前临时组队。" },
+        { question: "接力的交接规则是什么", answer: "接力交接需要在指定的交接区进行。交接时计时芯片会自动记录。请仔细阅读参赛规则手册。" },
+        { question: "接力队员可以在比赛中途替换吗", answer: "不可以。一旦比赛开始，队员不能中途替换。" },
+        { question: "接力队伍需要/要求统一服装吗", answer: "不需要。您可以自行选择着装，但建议同一队伍适当统一，方便队员之间识别与配合。" },
+      ]
+    },
+    {
+      id: "technical", name: "比赛成绩和排名",
+      items: [
+        { question: "如何查看成绩和排名", answer: "赛后可以在官方网站results.hyrox.com页面查看总用时、排名，各项目用时和排名。通常在赛后实时发布。" },
+        { question: "成绩有误怎么办/我对成绩有异议", answer: "如果您认为成绩有误，请发送英文邮件至results@hyrox.com，说明具体情况，会有HYROX官方裁判组进行复查并邮件回复您。" },
+        { question: "可以获得成绩证书吗", answer: "完赛选手可以在官方网站下载certificate。" },
+        { question: "成绩什么时候发布", answer: "通常在赛后实时发布初步成绩。可能会有变化，以最终发布为准。" },
+        { question: "可以查看分段/不同项目的成绩吗", answer: "是的。官方网站results.hyrox.com会提供详细的分段成绩和排名。" },
+        { question: "残疾人运动员有没有特殊规则", answer: "目前HYROX中国没有视障/其他障碍的特殊规则，所有选手按统一标准参赛的。您可以带一位陪跑员，陪跑员可以在场边提供引导（比如提示方向、带到正确位置、整理绳索、帮您找到球等），但不能参与任何比赛动作或帮助完成项目。" },
+        { question: "残疾人运动员该怎么备赛", answer: "建议赛前多多按照比赛规则进行训练，提前熟悉项目的动作要求和节奏，比如墙球的投掷力度、目标高度等，这样会更有助于您在比赛中顺利完成项目。教练和陪跑员也可以在训练时一起配合指引，建立空间感，进行动作引导和校正，减少出错频次， 保证安全。" },
+        { question: "怎么购买/领取我的照片", answer: "您可于赛后前往网站https://sportograf.com找到HYROX对应赛事的相册,通过您报名参赛时使用的电子邮箱地址与人脸识别检索您的所有照片，并决定是否购买(照片通常于赛后2-7天内更新完毕,请耐心等待。微信小程序特别优惠：在结账时输入您的参赛电子票码，即可享受专属折扣。" },
+        { question: "如何获得官方成绩证明", answer: "可以在官方网站下载PDF版本的成绩证明。" },
+      ]
+    },
+    {
+      id: "other", name: "其他问题",
+      items: [
+        { question: "比赛可以直播吗", answer: "官方会进行直播。具体直播链接请关注官方公众号。" },
+        { question: "可以带家人/朋友观看吗", answer: "可以。家人朋友需要在小程序购买观众票，在指定观众区观看。" },
+        { question: "我是运动员，可以免费观赛吗", answer: "可以，您可以免费观看您本人比赛日当天的全部赛事。如果您Day 1参赛，Day 2不参赛但是想要观赛，需要购买Day 2的观众票。" },
+        { question: "停车位置在哪里", answer: "停车信息会在赛前详细说明。建议提前查询交通路线以便停车。" },
+        { question: "比赛地点交通怎么样", answer: "赛事地点通常选择交通便利的位置。具体交通信息请您提前查看比赛场馆，做好出行准备。" },
+        { question: "可以带宠物吗", answer: "不可以。为了安全和卫生，赛事场地不允许带宠物。" },
+        { question: "怎么开发票", answer: "您好，比赛结束后可以申请开具发票，请扫码填写信息。请您仔细阅读需要填写的信息及上传图片的要求，如信息不全无法开票，请您知悉～ https://dcwjxcx.com/web/jump-mp.html?id=9x9YU8m3mH3qNDiGBzej。发票会在申请之日起5个工作日发到您邮箱。" },
+        { question: "有更衣室吗", answer: "有。赛事场地会为选手提供更衣室。" },
+        { question: "可以寄存物品吗", answer: "可以。我们会为选手提供免费的物品寄存服务；观众无法存包，请观众保管好自己随身物品。" },
+        { question: "拿到了世锦赛名额，可以换队友，换组别吗", answer: "世锦赛严格要求必须是分站晋级原选手，不可更改，也不可以换组别。" },
+        { question: "如果我拿了年龄组第一，会受邀世锦赛吗？", answer: "世锦赛名额以世锦赛邀约邮件为准。通常赛后3-5个工作日以内就会收到邮件。请注意，需要您根据邮件指示，自行购票、安排签证、机酒出行。" },
+        { question: "如何联系组委会", answer: "可以通过官方公众号、小程序联系组委会客服。" },
+      ]
+    }
+  ]
 };
 
-const state = {
-    expanded: new Set(),
-    keyword: ""
-};
+// linkify URLs and emails in answer text
+function linkify(text) {
+  return text
+    .replace(/(https?:\/\/[^\s，。）]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+    .replace(/([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/g, '<a href="mailto:$1">$1</a>');
+}
 
-function init() {
-    document.getElementById("app").innerHTML = `
-        <h1 class="text-3xl font-bold mb-4">HYROX FAQ</h1>
-        <input id="search" class="w-full p-3 border rounded mb-6" placeholder="搜索问题..." />
-        <div id="faq"></div>
-    `;
+const state = { expanded: new Set(), keyword: '' };
 
-    document.getElementById("search").addEventListener("input", e => {
-        state.keyword = e.target.value.toLowerCase();
-        render();
-    });
+function buildNav() {
+  const nav = document.getElementById('nav-list');
+  faqData.categories.forEach((c, i) => {
+    const li = document.createElement('li');
+    li.className = 'nav-item';
+    const a = document.createElement('a');
+    a.className = 'nav-link';
+    a.textContent = c.name;
+    a.href = '#cat-' + c.id;
+    a.onclick = e => {
+      e.preventDefault();
+      document.getElementById('cat-' + c.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    li.appendChild(a);
+    nav.appendChild(li);
+  });
+}
 
-    document.addEventListener("click", e => {
-        const btn = e.target.closest("[data-id]");
-        if (!btn) return;
-
-        const id = btn.dataset.id;
-        if (state.expanded.has(id)) state.expanded.delete(id);
-        else state.expanded.add(id);
-
-        render();
-    });
-
-    render();
+function totalCount() {
+  return faqData.categories.reduce((s, c) => s + c.items.length, 0);
 }
 
 function render() {
-    const box = document.getElementById("faq");
-    const kw = state.keyword;
+  const kw = state.keyword.toLowerCase();
+  const main = document.getElementById('faq-main');
 
-    const filtered = faqData.categories.map(c => ({
-        ...c,
-        items: c.items.filter(i =>
-            i.question.toLowerCase().includes(kw) ||
-            i.answer.toLowerCase().includes(kw)
-        )
-    })).filter(c => c.items.length);
+  const filtered = faqData.categories.map(c => ({
+    ...c,
+    items: c.items.filter(i =>
+      i.question.toLowerCase().includes(kw) ||
+      i.answer.toLowerCase().includes(kw)
+    )
+  })).filter(c => c.items.length);
 
-    box.innerHTML = filtered.map(c => `
-        <div class="mb-6">
-            <h2 class="text-xl font-bold mb-4 mt-6 text-gray-900">${c.name}</h2>
+  if (!filtered.length) {
+    main.innerHTML = `<div class="no-results"><strong>暂无结果</strong>换个关键词试试？</div>`;
+    return;
+  }
 
-            ${c.items.map((i, idx) => {
-                const id = c.id + "-" + idx;
-                const open = state.expanded.has(id);
+  main.innerHTML = filtered.map((c, ci) => `
+    <div class="category-block" id="cat-${c.id}">
+      <div class="cat-header">
+        <span class="cat-num">0${ci + 1}</span>
+        <span class="cat-title">${c.name}</span>
+        <span class="cat-count">${c.items.length} 条</span>
+      </div>
+      <div class="faq-list">
+        ${c.items.map((item, idx) => {
+          const id = c.id + '-' + idx;
+          const open = state.expanded.has(id);
+          return `
+            <div class="faq-item">
+              <button class="faq-q ${open ? 'open' : ''}" data-id="${id}" aria-expanded="${open}">
+                <span class="faq-q-text">${item.question}</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-a ${open ? 'open' : ''}">${linkify(item.answer)}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
 
-                return `
-                    <div class="border rounded mb-4 bg-white shadow-sm">
-                        <button class="w-full text-left p-4 flex justify-between items-center font-semibold text-gray-800 hover:bg-gray-50" data-id="${id}">
-                            <span>${i.question}</span>
-                            <span class="text-gray-400 text-sm">${open ? "▲" : "▼"}</span>
-                        </button>
+  // update header count
+  const visible = filtered.reduce((s, c) => s + c.items.length, 0);
+  document.getElementById('header-count').textContent =
+    kw ? `找到 ${visible} 条` : `共 ${totalCount()} 条`;
 
-                        ${open ? `
-                            <div class="p-4 border-t text-gray-500 leading-relaxed bg-gray-50">
-                                ${i.answer}
-                            </div>
-                        ` : ""}
-                    </div>
-                `;
-            }).join("")}
-        </div>
-    `).join("");
+  // highlight active nav
+  document.querySelectorAll('.nav-link').forEach(a => {
+    const target = a.getAttribute('href').slice(1);
+    a.classList.toggle('active', filtered.some(c => 'cat-' + c.id === target));
+  });
 }
 
-init();
+// toggle
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-id]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  if (state.expanded.has(id)) state.expanded.delete(id);
+  else state.expanded.add(id);
+  render();
+});
+
+// search
+document.getElementById('search').addEventListener('input', e => {
+  state.keyword = e.target.value;
+  state.expanded.clear();
+  render();
+});
+
+// intersection observer for nav highlight
+function setupObserver() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.nav-link').forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  document.querySelectorAll('.category-block').forEach(el => observer.observe(el));
+}
+
+buildNav();
+render();
+setTimeout(setupObserver, 100);
 </script>
 </body>
 </html>
