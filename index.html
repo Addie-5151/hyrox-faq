@@ -648,6 +648,187 @@ const faqDataEn = {
   ]
 };
 
+/* Keep the Chinese and English libraries complete and organised in the same way. */
+const missingEnglishItems = [
+  {
+    sourceCategory: "modification",
+    question: "What is the 24-hour refund policy?",
+    answer: "Starting with the Beijing race in September 2026, you can request a refund within 24 hours of buying your ticket without paying a refund fee. The final refund deadline for the race still applies. Please check the registration page for the exact policy. The organiser has the final right of interpretation."
+  },
+  {
+    sourceCategory: "awards",
+    question: "Is my ticket held after I submit the order, and how long do I have to pay?",
+    answer: "After you submit the registration, your ticket is held for about five minutes. Please follow the timer shown on the page. Fill in your details and complete payment before the timer ends."
+  },
+  {
+    sourceCategory: "awards",
+    question: "Can athletes with disabilities take part?",
+    answer: "We do not currently have an Adaptive division. Athletes with disabilities may enter an Open division. We recommend racing with one guide runner. You need to arrange the guide runner and tell us in advance. The guide runner may give directions, organise ropes, and offer general support. They will not appear in the rankings and cannot help complete any workout, such as pushing the sled."
+  },
+  {
+    sourceCategory: "health-safety",
+    question: "How does priority registration work for partner gyms and venues?",
+    answer: "Priority registration dates for partner gyms and venues are announced on official social media for each race. For the ticket link and registration process, please contact the manager of your partner gym or venue."
+  },
+  {
+    sourceCategory: "health-safety",
+    question: "If another race day is added, can my race day change or can I move from Day 1 to Day 2?",
+    answer: "You will race on the day you selected when you registered. Adding another race day will not move you automatically. We cannot change your race day. If you want a different day, you need to request a refund and buy a new ticket."
+  },
+  {
+    sourceCategory: "health-safety",
+    question: "Can I switch to another race category?",
+    answer: "To keep the competition fair, HYROX does not allow category changes after a ticket has been purchased. This rule applies to HYROX races worldwide."
+  },
+  {
+    sourceCategory: "other",
+    question: "How is the age group decided for a Doubles team?",
+    answer: "We use the athletes' ages on race day and calculate the average. For example, if the athletes are 41 and 48, the average is 44.5. We round it down to 44, so the team enters the 40–44 age group."
+  }
+];
+
+missingEnglishItems.forEach(item => {
+  const category = faqDataEn.categories.find(cat => cat.id === item.sourceCategory);
+  category.items.push({ question: item.question, answer: item.answer });
+});
+
+const englishEdits = new Map([
+  ["Athletes from Hong Kong, Macao, Taiwan, overseas, or other countries cannot register, sign the agreement, or pass real-name verification", "I am an international athlete and cannot register, sign the agreement, or pass real-name verification. What should I do?"],
+  ["Questions about priority registration for partner gyms", "How does priority registration for partner gyms work?"],
+  ["My teammate has no profile picture in the Mini Program", "Why does my teammate have no profile picture in the Mini Program?"],
+  ["The Mini Program says the refund deadline has passed", "What if the Mini Program says the refund deadline has passed?"],
+  ["A product collected or purchased at an on-site sponsor booth does not work, is faulty, or has a quality issue", "What should I do if a product from a sponsor booth is faulty?"],
+  ["My photo discount code does not work, the price stays the same, the email is incorrect, or I cannot find my photos", "What if my photo code does not work or I cannot find my photos?"],
+  ["What are the free-entry rules for children and elderly spectators?", "Which children and older spectators can enter for free?"],
+  ["What is transport to the race venue like?", "How do I get to the race venue?"],
+  ["Business or brand partnerships", "How can I discuss a business or brand partnership?"],
+  ["Gym affiliation partnership", "How can my gym become a HYROX partner?"],
+  ["Assistant judge or volunteer applications", "How can I apply to be an assistant judge or volunteer?"],
+  ["PFT fitness test", "Where can I find information about PFT fitness tests?"]
+]);
+
+faqDataEn.categories.forEach(category => {
+  category.items.forEach(item => {
+    if (englishEdits.has(item.question)) item.question = englishEdits.get(item.question);
+  });
+});
+
+const englishAnswerEdits = new Map([
+  ["Can I change my category?", "HYROX manages race categories strictly to keep the competition fair. You cannot change your category after registration. There is one medical exception for Doubles. If one teammate has a medical condition and provides a doctor's certificate, the other teammate may move to an Individual category. This is only possible if that category still has tickets available."],
+  ["Are there special rules for athletes with disabilities or adaptive athletes?", "HYROX China does not currently have separate rules for adaptive athletes. All athletes compete under the same standards. An adaptive athlete may bring one guide runner. The guide may give directions, lead the athlete to the right place, organise ropes, or help locate a ball.\n\nThe guide cannot perform any race movement or help complete a workout. For example, they cannot push or pull a sled or do wall balls. If they do, the athlete's result will be marked as non-competitive. It will not count towards rankings or qualification."]
+]);
+
+faqDataEn.categories.forEach(category => {
+  category.items.forEach(item => {
+    if (englishAnswerEdits.has(item.question)) item.answer = englishAnswerEdits.get(item.question);
+  });
+});
+
+const categoryDefinitions = {
+  zh: [
+    ["registration", "报名与购票"],
+    ["changes", "退款、延期与变更"],
+    ["race-day", "规则、备赛与比赛日"],
+    ["doubles-relay", "双人组与接力"],
+    ["health-accessibility", "健康、安全与无障碍参赛"],
+    ["nutrition", "补给与物资"],
+    ["awards", "完赛物资与颁奖"],
+    ["results", "成绩、排名与照片"],
+    ["world-championships", "世锦赛"],
+    ["venue-spectators", "场馆、交通与观赛"],
+    ["other", "合作与其他问题"]
+  ],
+  en: [
+    ["registration", "Registration & Tickets"],
+    ["changes", "Refunds, Deferrals & Changes"],
+    ["race-day", "Rules, Training & Race Day"],
+    ["doubles-relay", "Doubles & Relay"],
+    ["health-accessibility", "Health, Safety & Accessibility"],
+    ["nutrition", "Hydration & Supplies"],
+    ["awards", "Finisher Items & Awards"],
+    ["results", "Results, Rankings & Photos"],
+    ["world-championships", "World Championships"],
+    ["venue-spectators", "Venue, Travel & Spectators"],
+    ["other", "Partnerships & Other Questions"]
+  ]
+};
+
+const reclassifyFaq = (data, lang) => {
+  const sourceItems = data.categories.flatMap(category =>
+    category.items.map(item => ({ ...item, sourceCategory: category.id }))
+  );
+
+  const isZh = lang === "zh";
+  const textSets = {
+    raceDay: new Set(isZh ? [
+      "运动员怎么备赛，比赛规则是什么", "运动员检录提前多久到场", "单个比赛日报了两个以上组别，怎么检录",
+      "一天两个组别，出发时间太近怎么办？可不可以给我改一下出发时间，我要赶飞机。", "赛前需要做什么准备",
+      "比赛中可以停下来休息吗", "如果中途放弃怎么办", "26-27赛季的rulebook比赛规则", "PFT体能测试"
+    ] : [
+      "How should athletes prepare, and what are the race rules?", "How early should athletes arrive for check-in?",
+      "How do I check in if I entered more than one category on the same race day?", "What if my start times for two categories on the same day are too close?",
+      "How should I prepare before the race?", "Can I stop and rest during the race?", "What if I withdraw during the race?",
+      "2026–27 season race rulebook", "Where can I find information about PFT fitness tests?"
+    ]),
+    doublesRelay: new Set(isZh ? [
+      "双人和接力的报名费是单人价格还是总价格", "双人组别年龄如何分配"
+    ] : [
+      "Is the Doubles or Relay registration fee per person or for the whole team?", "How is the age group decided for a Doubles team?"
+    ]),
+    registration: new Set(isZh ? [
+      "点击报名提交订单后，会锁票吗？报名时多久时间需要完成付款？", "合作健身房/合作场馆优先购相关"
+    ] : [
+      "Is my ticket held after I submit the order, and how long do I have to pay?", "How does priority registration work for partner gyms and venues?"
+    ]),
+    changes: new Set(isZh ? [
+      "我看到赛事新增了一天/我的组别在两个比赛日都有比赛，我的参赛日期会被调整吗？我的组别在两个比赛日都有比赛，我买了DAY 1，可以帮我改到DAY 2吗？",
+      "可以更换组别吗"
+    ] : [
+      "If another race day is added, can my race day change or can I move from Day 1 to Day 2?", "Can I switch to another race category?"
+    ]),
+    accessibility: new Set(isZh ? [
+      "残障运动员可以参赛吗", "残疾人运动员/适应性选手有没有特殊规则", "视障选手该怎么备赛"
+    ] : [
+      "Can athletes with disabilities take part?", "Are there special rules for athletes with disabilities or adaptive athletes?",
+      "How should a visually impaired athlete prepare?"
+    ]),
+    venue: new Set(isZh ? [
+      "比赛有直播吗", "可以带家人/朋友观看吗", "观众票可以现场买吗？", "儿童和老人（观众）的免票规定？",
+      "我是运动员，可以免费观赛吗", "停车位置在哪里", "比赛地点交通怎么样", "可以带宠物吗", "有更衣室吗", "可以寄存物品/包裹吗"
+    ] : [
+      "Is the race livestreamed?", "Can family or friends come to watch?", "Can spectator tickets be bought on site?",
+      "Which children and older spectators can enter for free?", "As an athlete, can I watch for free?", "Where can I park?",
+      "How do I get to the race venue?", "Can I bring a pet?", "Are changing rooms available?", "Can I store belongings or bags?"
+    ])
+  };
+
+  const getCategory = item => {
+    if (textSets.raceDay.has(item.question)) return "race-day";
+    if (textSets.doublesRelay.has(item.question) || item.sourceCategory === "relay") return "doubles-relay";
+    if (textSets.registration.has(item.question)) return "registration";
+    if (textSets.changes.has(item.question) || item.sourceCategory === "modification") return "changes";
+    if (textSets.accessibility.has(item.question)) return "health-accessibility";
+    if (textSets.venue.has(item.question)) return "venue-spectators";
+    if (item.sourceCategory === "registration") return "registration";
+    if (item.sourceCategory === "health-safety") return "health-accessibility";
+    if (item.sourceCategory === "supplies") return "nutrition";
+    if (item.sourceCategory === "awards") return "awards";
+    if (item.sourceCategory === "technical") return "results";
+    if (item.sourceCategory === "world-championships") return "world-championships";
+    return "other";
+  };
+
+  const buckets = new Map(categoryDefinitions[lang].map(([id, name]) => [id, { id, name, items: [] }]));
+  sourceItems.forEach(item => {
+    const { sourceCategory, ...cleanItem } = item;
+    buckets.get(getCategory(item)).items.push(cleanItem);
+  });
+  data.categories = categoryDefinitions[lang].map(([id]) => buckets.get(id));
+};
+
+reclassifyFaq(faqDataZh, "zh");
+reclassifyFaq(faqDataEn, "en");
+
 // linkify URLs and emails in answer text
 function linkify(text) {
   return text
